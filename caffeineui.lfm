@@ -5,7 +5,7 @@ object Form1: TForm1
   Width = 510
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Caffeine'
+  Caption = 'Caffeine-Simplified'
   ClientHeight = 150
   ClientWidth = 510
   DesignTimePPI = 120
@@ -48,36 +48,10 @@ object Form1: TForm1
     0000000000000000000000000000000000000000000000000000000000000000
     0000
   }
-  OnClose = FormClose
   OnCreate = FormCreate
-  OnShow = FormShow
   OnWindowStateChange = FormWindowStateChange
   Position = poScreenCenter
-  LCLVersion = '2.0.8.0'
-  object ButtonPanelConfirm: TButtonPanel
-    Left = 8
-    Height = 38
-    Top = 104
-    Width = 494
-    BorderSpacing.Around = 8
-    OKButton.Name = 'OKButton'
-    OKButton.Caption = '&Save Changes'
-    OKButton.DefaultCaption = False
-    OKButton.OnClick = OKButtonClick
-    HelpButton.Name = 'HelpButton'
-    HelpButton.Caption = '&About'
-    HelpButton.DefaultCaption = False
-    HelpButton.OnClick = HelpButtonClick
-    CloseButton.Name = 'CloseButton'
-    CloseButton.DefaultCaption = True
-    CloseButton.OnClick = CloseButtonClick
-    CancelButton.Name = 'CancelButton'
-    CancelButton.Caption = '&Discard Changes'
-    CancelButton.DefaultCaption = False
-    CancelButton.OnClick = CancelButtonClick
-    TabOrder = 0
-    ShowButtons = [pbOK, pbCancel, pbHelp]
-  end
+  LCLVersion = '2.2.6.0'
   object CheckGroupSettings: TCheckGroup
     Left = 10
     Height = 80
@@ -100,10 +74,29 @@ object Form1: TForm1
     )
     OnItemClick = CheckGroupSettingsItemClick
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
     Data = {
       0100000002
     }
+  end
+  object ButtonPanelConfirm: TButtonPanel
+    Left = 8
+    Height = 38
+    Top = 104
+    Width = 494
+    BorderSpacing.Around = 8
+    OKButton.Name = 'OKButton'
+    OKButton.Caption = '&Save Changes'
+    HelpButton.Name = 'HelpButton'
+    HelpButton.Caption = '&About'
+    HelpButton.OnClick = HelpButtonClick
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.Caption = '&Discard Changes'
+    TabOrder = 1
+    ShowButtons = [pbHelp]
+    ShowGlyphs = [pbHelp]
   end
   object TrayIconCaffeine: TTrayIcon
     BalloonFlags = bfInfo
@@ -151,12 +144,12 @@ object Form1: TForm1
     }
     Visible = True
     OnClick = TrayIconCaffeineClick
-    left = 460
-    top = 20
+    Left = 460
+    Top = 20
   end
   object PopupMenuTrayIcon: TPopupMenu
-    left = 410
-    top = 20
+    Left = 410
+    Top = 20
     object MenuItemSettings: TMenuItem
       Caption = '&Settings'
       OnClick = MenuItemSettingsClick
@@ -168,7 +161,7 @@ object Form1: TForm1
   end
   object UniqueInstance1: TUniqueInstance
     Enabled = True
-    left = 360
-    top = 20
+    Left = 360
+    Top = 20
   end
 end

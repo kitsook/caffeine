@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ButtonPanel,
-  Menus, StdCtrls, UniqueInstance, VersionSupport, windows;
+  Menus, UniqueInstance, VersionSupport, windows;
 
 type
 
@@ -20,17 +20,12 @@ type
     PopupMenuTrayIcon: TPopupMenu;
     TrayIconCaffeine: TTrayIcon;
     UniqueInstance1: TUniqueInstance;
-    procedure CancelButtonClick(Sender: TObject);
     procedure CheckGroupSettingsItemClick(Sender: TObject; Index: integer);
-    procedure CloseButtonClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
     procedure HelpButtonClick(Sender: TObject);
     procedure MenuItemSettingsClick(Sender: TObject);
     procedure MenuItemExitClick(Sender: TObject);
-    procedure OKButtonClick(Sender: TObject);
     procedure TrayIconCaffeineClick(Sender: TObject);
   private
 
@@ -38,7 +33,7 @@ type
 
   end;
 
-(* Source Credits: http://delphidabbler.com/tips/127 *)
+(* Source Credits: https://tips.delphidabbler.com/tips/127.html *)
 type
   EXECUTION_STATE = DWORD;
 
@@ -52,22 +47,22 @@ const
 procedure SetThreadExecutionState(ESFlags: EXECUTION_STATE);
   stdcall; external kernel32 name 'SetThreadExecutionState';
 
+procedure ApplySetting(TurnOn: Boolean);
+
 var
   Form1: TForm1;
-  IsFirstShow: Boolean = True;
-  PreventDisplaySleep: Boolean = False;
+
 implementation
 
 {$R *.lfm}
 
-function ConfirmClose : Boolean;
+procedure ApplySetting(TurnOn: Boolean);
 begin
-  if QuestionDlg('Caffeine', 'Are you sure you want to quit? ' + sLineBreak +
-  sLineBreak + 'This will allow your computer to sleep.',
-  mtWarning, [mrYes, '&Yes', mrNo, '&No', 'IsDefault'], 0) = mrYes then
-    Result := True
+  SetThreadExecutionState(ES_CONTINUOUS);
+  if TurnOn then
+    SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED or ES_DISPLAY_REQUIRED)
   else
-    Result := False;
+    SetThreadExecutionState(ES_CONTINUOUS);
 end;
 
 { TForm1 }
@@ -89,50 +84,28 @@ begin
   end;
 end;
 
-procedure TForm1.CloseButtonClick(Sender: TObject);
-begin
-  Form1.Hide;
-end;
-
-procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  if not ConfirmClose then
-    CloseAction := caNone;
-end;
-
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   (* Prevent sleeping. *)
-  SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED);
-end;
-
-procedure TForm1.FormShow(Sender: TObject);
-begin
-  if IsFirstShow then
-  begin
-    ButtonPanelConfirm.CancelButton.Enabled := False;
-    IsFirstShow := False;
-  end
-  else
-  begin
-    ButtonPanelConfirm.OKButton.Enabled := False;
-  end;
-end;
-
-procedure TForm1.CancelButtonClick(Sender: TObject);
-begin
-  Form1.Hide;
+  SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED or ES_DISPLAY_REQUIRED);
+  CheckGroupSettings.Checked[0] := True;
 end;
 
 procedure TForm1.CheckGroupSettingsItemClick(Sender: TObject; Index: integer);
 begin
-  ButtonPanelConfirm.OKButton.Enabled := True;
+  if Index = 0 then
+  begin
+    ApplySetting(CheckGroupSettings.Checked[0]);
+  end
 end;
 
 procedure TForm1.HelpButtonClick(Sender: TObject);
 begin
-  MessageDlg('Caffeine', 'Caffeine v' + LeftStr(GetFileVersion, 5) + ' © 2020 Kyle Leong' +
-  sLineBreak + 'https://github.com/kyleleong/caffeine' + sLineBreak + sLineBreak +
+  MessageDlg('Caffeine-Simplified', 'Caffeine-Simplified v' + LeftStr(GetFileVersion, 5) + ' © 2020 Kyle Leong' + sLineBreak +
+  'https://github.com/kyleleong/caffeine' + sLineBreak +
+  '© 2023 Clarence Ho' + sLineBreak +
+  'https://github.com/kitsook/caffeine' + sLineBreak +
+  sLineBreak +
   'Caffeine prevents your computer from going to sleep while it is active. ' +
   'You can quit the program or access its settings at any time from the tray icon.' +
   sLineBreak + sLineBreak + 'Caffeine uses icons from:' + sLineBreak +
@@ -149,18 +122,6 @@ end;
 procedure TForm1.MenuItemExitClick(Sender: TObject);
 begin
   Form1.Close;
-end;
-
-procedure TForm1.OKButtonClick(Sender: TObject);
-begin
-  (* Need to disable and re-enable with correct settings. *)
-  SetThreadExecutionState(ES_CONTINUOUS);
-  if CheckGroupSettings.Checked[0] then
-    SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED or ES_DISPLAY_REQUIRED)
-  else
-    SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED);
-  Form1.Hide;
-  Form1.ButtonPanelConfirm.CancelButton.Enabled := True;
 end;
 
 end.

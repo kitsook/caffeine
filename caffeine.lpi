@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
+      <Flags>
+        <CompatibilityMode Value="True"/>
+      </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
-      <Title Value="Caffeine"/>
+      <Title Value="Caffeine-Simplified"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True/PM"/>
-        <TextName Value="KyleLeong.Caffeine"/>
+        <TextName Value="Caffeine-Simplified"/>
         <TextDesc Value="Prevent your computer from going to sleep."/>
       </XPManifest>
       <Icon Value="0"/>
@@ -20,8 +22,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <RevisionNr Value="1"/>
-      <StringTable CompanyName="Kyle Leong" FileDescription="Prevent your computer from going to sleep." InternalName="Caffeine" LegalCopyright="Kyle Leong" ProductName="Caffeine"/>
+      <RevisionNr Value="2"/>
+      <StringTable Comments="Based on Caffeine by Kyle Leong" FileDescription="Caffeine-Simplified" InternalName="Caffeine-Simplified" LegalCopyright="Clarence Ho" ProductName="Caffeine-Simplified"/>
     </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>
@@ -107,7 +109,6 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0"/>
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>

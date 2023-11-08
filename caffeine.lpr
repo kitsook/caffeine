@@ -14,7 +14,7 @@ uses
 
 begin
   RequireDerivedFormResource:=True;
-  Application.Title:='Caffeine';
+  Application.Title:='Caffeine-Simplified';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
