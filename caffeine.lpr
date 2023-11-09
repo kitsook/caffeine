@@ -17,6 +17,7 @@ begin
   Application.Title:='Caffeine-Simplified';
   Application.Scaled:=True;
   Application.Initialize;
+  Application.ShowMainForm:=FALSE;
   Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

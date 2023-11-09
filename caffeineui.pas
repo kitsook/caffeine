@@ -5,7 +5,7 @@ unit caffeineui;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ButtonPanel,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   Menus, UniqueInstance, VersionSupport, windows;
 
 type
@@ -13,20 +13,18 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    ButtonPanelConfirm: TButtonPanel;
-    CheckGroupSettings: TCheckGroup;
-    MenuItemSettings: TMenuItem;
+    MenuItemAbout: TMenuItem;
+    MenuItemEnable: TMenuItem;
     MenuItemExit: TMenuItem;
     PopupMenuTrayIcon: TPopupMenu;
+    Separator1: TMenuItem;
     TrayIconCaffeine: TTrayIcon;
     UniqueInstance1: TUniqueInstance;
-    procedure CheckGroupSettingsItemClick(Sender: TObject; Index: integer);
     procedure FormCreate(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
-    procedure HelpButtonClick(Sender: TObject);
-    procedure MenuItemSettingsClick(Sender: TObject);
+    procedure MenuItemAboutClick(Sender: TObject);
+    procedure MenuItemEnableClick(Sender: TObject);
     procedure MenuItemExitClick(Sender: TObject);
-    procedure TrayIconCaffeineClick(Sender: TObject);
   private
 
   public
@@ -67,14 +65,6 @@ end;
 
 { TForm1 }
 
-procedure TForm1.TrayIconCaffeineClick(Sender: TObject);
-begin
-  if Form1.Visible then
-    Form1.Hide
-  else
-    Form1.Show;
-end;
-
 procedure TForm1.FormWindowStateChange(Sender: TObject);
 begin
   if Form1.WindowState = wsMinimized then
@@ -86,37 +76,32 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  (* Prevent sleeping. *)
-  SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED or ES_DISPLAY_REQUIRED);
-  CheckGroupSettings.Checked[0] := True;
+  MenuItemEnable.Checked := True;
+  ApplySetting(True);
 end;
 
-procedure TForm1.CheckGroupSettingsItemClick(Sender: TObject; Index: integer);
+procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  if Index = 0 then
-  begin
-    ApplySetting(CheckGroupSettings.Checked[0]);
-  end
-end;
-
-procedure TForm1.HelpButtonClick(Sender: TObject);
-begin
-  MessageDlg('Caffeine-Simplified', 'Caffeine-Simplified v' + LeftStr(GetFileVersion, 5) + ' © 2020 Kyle Leong' + sLineBreak +
+  MessageDlg('Caffeine-Simplified',
+  'Caffeine-Simplified v' + LeftStr(GetFileVersion, 5) + sLineBreak +
+  '© 2020 Kyle Leong' + sLineBreak +
   'https://github.com/kyleleong/caffeine' + sLineBreak +
   '© 2023 Clarence Ho' + sLineBreak +
   'https://github.com/kitsook/caffeine' + sLineBreak +
   sLineBreak +
-  'Caffeine prevents your computer from going to sleep while it is active. ' +
-  'You can quit the program or access its settings at any time from the tray icon.' +
-  sLineBreak + sLineBreak + 'Caffeine uses icons from:' + sLineBreak +
+  'Caffeine prevents your computer from going to sleep while it is enabled.' + sLineBreak
+  + sLineBreak +
+  'Caffeine uses icons from:' + sLineBreak +
   'https://www.famfamfam.com/lab/icons/silk/' + sLineBreak +
-  'https://www.flaticon.com/authors/freepik/'
-  , mtInformation, [mbOK], 0);
+  'https://www.flaticon.com/authors/freepik/',
+  mtInformation, [mbOK], 0);
+
 end;
 
-procedure TForm1.MenuItemSettingsClick(Sender: TObject);
+procedure TForm1.MenuItemEnableClick(Sender: TObject);
 begin
-  Form1.Show;
+  MenuItemEnable.Checked := Not MenuItemEnable.Checked;
+  ApplySetting(MenuItemEnable.Checked);
 end;
 
 procedure TForm1.MenuItemExitClick(Sender: TObject);
