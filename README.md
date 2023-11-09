@@ -8,6 +8,6 @@ Caffeine-Simplified is a small utility program that prevents your computer from 
 
 ## Downloads
 
-Caffeine has been tested and confirmed to work on Windows XP (x86), 7 (x64), and 10 (x64), but it should work on any version of Windows XP or later, 32 or 64 bit. It will not work on versions of Windows before XP due to those versions of Windows lacking an API used to keep the system active.
+Caffeine-Simplified has been tested and confirmed to work on Windows XP (x86), 7 (x64), and 10 (x64), but it should work on any version of Windows XP or later, 32 or 64 bit. It will not work on versions of Windows before XP due to those versions of Windows lacking an API used to keep the system active.
 
-[Download Caffeine](https://github.com/kitsook/caffeine/releases)
+[Download](https://github.com/kitsook/caffeine/releases)
