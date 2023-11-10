@@ -25,6 +25,7 @@ type
     procedure MenuItemAboutClick(Sender: TObject);
     procedure MenuItemEnableClick(Sender: TObject);
     procedure MenuItemExitClick(Sender: TObject);
+    procedure TrayIconCaffeineClick(Sender: TObject);
   private
 
   public
@@ -61,6 +62,21 @@ begin
     SetThreadExecutionState(ES_CONTINUOUS or ES_SYSTEM_REQUIRED or ES_DISPLAY_REQUIRED)
   else
     SetThreadExecutionState(ES_CONTINUOUS);
+end;
+
+procedure DrawIcon(Enabled: Boolean);
+begin
+  if Enabled then
+    Form1.TrayIconCaffeine.Icon.LoadFromResourceName(HINSTANCE, 'CAFFEINE_ENABLED')
+  else
+    Form1.TrayIconCaffeine.Icon.LoadFromResourceName(HINSTANCE, 'CAFFEINE_DISABLED');
+end;
+
+procedure Toggle;
+begin
+  Form1.MenuItemEnable.Checked := Not Form1.MenuItemEnable.Checked;
+  ApplySetting(Form1.MenuItemEnable.Checked);
+  DrawIcon(Form1.MenuItemEnable.Checked);
 end;
 
 { TForm1 }
@@ -100,13 +116,17 @@ end;
 
 procedure TForm1.MenuItemEnableClick(Sender: TObject);
 begin
-  MenuItemEnable.Checked := Not MenuItemEnable.Checked;
-  ApplySetting(MenuItemEnable.Checked);
+  Toggle;
 end;
 
 procedure TForm1.MenuItemExitClick(Sender: TObject);
 begin
   Form1.Close;
+end;
+
+procedure TForm1.TrayIconCaffeineClick(Sender: TObject);
+begin
+  Toggle;
 end;
 
 end.

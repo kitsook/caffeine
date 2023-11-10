@@ -18,6 +18,10 @@
         <TextDesc Value="Prevent your computer from going to sleep."/>
       </XPManifest>
       <Icon Value="0"/>
+      <Resources Count="2">
+        <Resource_0 FileName="caffeine_enabled.ico" Type="ICON" ResourceName="CAFFEINE_ENABLED"/>
+        <Resource_1 FileName="caffeine_disabled.ico" Type="ICON" ResourceName="CAFFEINE_DISABLED"/>
+      </Resources>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
