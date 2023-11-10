@@ -22,7 +22,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <RevisionNr Value="3"/>
+      <RevisionNr Value="4"/>
       <StringTable Comments="Based on Caffeine by Kyle Leong" FileDescription="Caffeine-Simplified" InternalName="Caffeine-Simplified" LegalCopyright="Clarence Ho" ProductName="Caffeine-Simplified"/>
     </VersionInfo>
     <BuildModes Count="3">
@@ -80,6 +80,8 @@
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
             <Optimizations>
               <OptimizationLevel Value="3"/>
             </Optimizations>
