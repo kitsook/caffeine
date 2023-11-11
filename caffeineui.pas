@@ -94,6 +94,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   MenuItemEnable.Checked := True;
   ApplySetting(True);
+  DrawIcon(True);
 end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
