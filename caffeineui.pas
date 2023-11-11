@@ -100,7 +100,7 @@ end;
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
   MessageDlg('Caffeine-Simplified',
-  'Caffeine-Simplified v' + LeftStr(GetFileVersion, 5) + sLineBreak +
+  'Caffeine (Simplified) v' + LeftStr(GetFileVersion, 5) + sLineBreak +
   '© 2020 Kyle Leong' + sLineBreak +
   'https://github.com/kyleleong/caffeine' + sLineBreak +
   '© 2023 Clarence Ho' + sLineBreak +
