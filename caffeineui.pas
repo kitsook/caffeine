@@ -25,6 +25,7 @@ type
     procedure MenuItemAboutClick(Sender: TObject);
     procedure MenuItemEnableClick(Sender: TObject);
     procedure MenuItemExitClick(Sender: TObject);
+    procedure TrayIconCaffeineClick(Sender: TObject);
   private
 
   public
@@ -63,6 +64,21 @@ begin
     SetThreadExecutionState(ES_CONTINUOUS);
 end;
 
+procedure DrawIcon(Enabled: Boolean);
+begin
+  if Enabled then
+    Form1.TrayIconCaffeine.Icon.LoadFromResourceName(HINSTANCE, 'CAFFEINE_ENABLED')
+  else
+    Form1.TrayIconCaffeine.Icon.LoadFromResourceName(HINSTANCE, 'CAFFEINE_DISABLED');
+end;
+
+procedure Toggle;
+begin
+  Form1.MenuItemEnable.Checked := Not Form1.MenuItemEnable.Checked;
+  ApplySetting(Form1.MenuItemEnable.Checked);
+  DrawIcon(Form1.MenuItemEnable.Checked);
+end;
+
 { TForm1 }
 
 procedure TForm1.FormWindowStateChange(Sender: TObject);
@@ -78,12 +94,13 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   MenuItemEnable.Checked := True;
   ApplySetting(True);
+  DrawIcon(True);
 end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
   MessageDlg('Caffeine-Simplified',
-  'Caffeine-Simplified v' + LeftStr(GetFileVersion, 5) + sLineBreak +
+  'Caffeine (Simplified) v' + LeftStr(GetFileVersion, 5) + sLineBreak +
   '© 2020 Kyle Leong' + sLineBreak +
   'https://github.com/kyleleong/caffeine' + sLineBreak +
   '© 2023 Clarence Ho' + sLineBreak +
@@ -100,13 +117,17 @@ end;
 
 procedure TForm1.MenuItemEnableClick(Sender: TObject);
 begin
-  MenuItemEnable.Checked := Not MenuItemEnable.Checked;
-  ApplySetting(MenuItemEnable.Checked);
+  Toggle;
 end;
 
 procedure TForm1.MenuItemExitClick(Sender: TObject);
 begin
   Form1.Close;
+end;
+
+procedure TForm1.TrayIconCaffeineClick(Sender: TObject);
+begin
+  Toggle;
 end;
 
 end.
