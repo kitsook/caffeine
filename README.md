@@ -13,6 +13,6 @@ Or use the menu by right-clicking it.
 
 ## Downloads
 
-Caffeine-Simplified since v1.0.4 has been tested and confirmed to work on Windows 7 or later, both 32-bit and 64-bit versions.
+Caffeine-Simplified since v1.0.4 should work on Windows 7 or later, both 32-bit and 64-bit versions.
 
 [Download](https://github.com/kitsook/caffeine/releases)
